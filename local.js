@@ -1,60 +1,46 @@
-
-
-
 const savedata=()=>{
-const productField=document.getElementById('product');
-const quantityField=document.getElementById('quantity');
-
-const product=productField.value;
-const quantity=quantityField.value;
-
-createData(product,quantity);
-setProduct(product,quantity);
+    const productField=document.getElementById('product');
+    const quantityField=document.getElementById('quantity');
+    const product=productField.value;
+    const quantity=quantityField.value;
+    showdata(product,quantity);
+    addproduct(product,quantity)
 productField.value='';
 quantityField.value='';
-
-
 }
 
+ const showdata=(product,quantity)=>{
+    const dataField=document.getElementById('dataAshbe')
+    const ul=document.createElement('ul')
+    ul.innerHTML=`
+    <li> Product Name: ${product} = Product Quantity: ${quantity} </li>`
+    dataField.appendChild(ul)
 
-const createData=(product,quantity)=>{
-    const dataShow=document.getElementById('dataAshbe');
-const li=document.createElement('li');
-li.innerHTML=`
-Product: ${product} = Quantity: ${quantity}`;
-dataShow.appendChild(li)
+ }
 
-}
-
-
-const addProduct=()=>{
+ const getData=()=>{
     let cart={};
-  
-    const getstorage=localStorage.getItem('cart')
- 
-    console.log(getstorage)
-    if(getstorage){
-        cart=JSON.parse(getstorage);       
+    const getStorage=localStorage.getItem('cart')
+    if(getStorage){
+        cart=JSON.parse(getStorage)
     }
     return cart;
-    
-}
-const setProduct=(product,quantity)=>{
-    const data=addProduct();
-   
-   
+ }
+
+ const addproduct=(product,quantity)=>{
+    const data=getData();
     data[product]=quantity;
-    const datamodified=JSON.stringify(data)
-     localStorage.setItem('cart',datamodified)
+    const dataStringify=JSON.stringify(data)
+    localStorage.setItem('cart',dataStringify)
+ }
 
-}
-const jala=()=>{
-    const data=addProduct();
+const dataVisual=()=>{
+    const data=getData();
     for(const product in data){
-        const quantity=data[product]
-        createData(product,quantity)
-
+        const quantity=data[product];
+        showdata(product,quantity)
     }
-    
 }
-jala()
+ dataVisual();
+
+ 
