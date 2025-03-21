@@ -39,11 +39,17 @@ total=parseInt(total/people.length)
 console.log(total)
 
 //solution2:
-const fullName=people.map(person=>{
+const older=people.map(person=>{
     const d = new Date().getFullYear()-new Date(person.DOB).getFullYear();
     if(d>30){
         console.log( person.firstName +' '+ person.lastName);
     }
  })
  //solution3:
- 
+ const allLists=[]
+ const fulName=people.map(person=>{
+    const Name=person.firstName+" "+person.lastName;
+    allLists.push(Name)
+   
+ })
+ console.log(allLists)
